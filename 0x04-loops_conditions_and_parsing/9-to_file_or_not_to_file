@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # to file to not to file
 
+school="./school"
+
 if [ -e "$school" ]
 then
 	echo "school file exists"
