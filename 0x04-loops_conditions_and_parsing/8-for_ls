@@ -2,6 +2,6 @@
 # loop through files and print names
 
 for i in *; do
-	filename=$(echo $i | cut -d "-" -f2)
+	filename=$(echo "$i" | cut -d "-" -f2)
 	echo "$filename"
 done
