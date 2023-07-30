@@ -3,4 +3,4 @@
 
 idtokill=$(pgrep -f 4-to_infinity_and_beyond)
 
-kill -9 $idtokill
+kill -9 "$idtokill"
