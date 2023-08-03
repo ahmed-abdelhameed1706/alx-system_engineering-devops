@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# script to show all ips in machine
+
+ifconfig | grep -o 'inet [0-9\.]*' | cut -d' ' -f2
