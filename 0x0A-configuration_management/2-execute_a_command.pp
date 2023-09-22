@@ -1,4 +1,4 @@
 #manifest to kill a process
-exec {'execute_a_command':
+exec {'executeacommand':
   command => 'pkill -f "killmenow"',
 }
