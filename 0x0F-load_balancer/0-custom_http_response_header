@@ -10,7 +10,7 @@ sudo sed -i "/listen 80 default_server/a rewrite ^/redirect_me $new_location per
 echo "Ceci n'est pas une page" > /var/www/html/404.html
 sudo sed -i '/listen 80 default_server;/a     error_page 404 /404.html;\n     location = /404.html {\n         internal;\n     }' /etc/nginx/sites-available/default
 # shellcheck disable=SC2154
-custom_header="X-Served-By: $host"
+custom_header="X-Served-By $HOSTNAME"
 sudo sed -i "/listen 80 default_server;/a \    add_header $custom_header;" /etc/nginx/sites-available/default
 sudo service nginx start
 sudo service nginx restart
