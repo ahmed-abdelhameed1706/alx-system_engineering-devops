@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#Script to install and configure nginx on the server
+# Script to install the nginx with custom header on any server
 
 sudo apt update -y
 sudo apt install nginx -y
