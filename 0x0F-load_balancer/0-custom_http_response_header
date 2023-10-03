@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#Script to install and configure nginx on the server
+
+sudo apt update -y
+sudo apt install nginx -y
+ufw allow 'nginx HTTP'
+sudo sh -c 'echo "Hello World!" > /var/www/html/index.nginx-debian.html'
+new_location='http://eng-ahmed.me'
+sudo sed -i "/listen 80 default_server/a rewrite ^/redirect_me $new_location permanent;" /etc/nginx/sites-available/default
+echo "Ceci n'est pas une page" > /var/www/html/404.html
+sudo sed -i '/listen 80 default_server;/a     error_page 404 /404.html;\n     location = /404.html {\n         internal;\n     }' /etc/nginx/sites-available/default
+custom_header='X-Served-By: $host'
+sudo sed -i "/listen 80 default_server;/a \    add_header $custom_header;" /etc/nginx/sites-available/default
+sudo service nginx start
+sudo service nginx restart
