@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Script to load balance between 2 servers
+
+sudo apt-get install --no-install-recommends software-properties-common
+sudo add-apt-repository ppa:vbernat/haproxy-2.8
+sudo apt-get install haproxy=2.8.\*
+
+echo "
+frontend http
+        bind *:80
+        mode http
+        default_backend my_backend
+
+backend my_backend
+        balance roundrobin
+        mode http
+        server server1 54.160.81.105:80 check
+        server server2 34.227.90.3:80 check
+" | sudo tee /etc/haproxy/haproxy.cfg > /dev/null
+sudo service haproxy start
