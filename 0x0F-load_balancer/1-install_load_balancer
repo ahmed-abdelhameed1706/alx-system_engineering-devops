@@ -3,7 +3,7 @@
 sudo apt-get update
 sudo apt-get install --no-install-recommends software-properties-common -y
 sudo add-apt-repository ppa:vbernat/haproxy-2.8 -y
-sudo apt-get install haproxy=2.8.\* -y
+sudo apt-get install haproxy -y
 
 echo "
 frontend http
