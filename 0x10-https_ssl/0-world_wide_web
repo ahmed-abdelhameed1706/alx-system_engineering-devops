@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# this is a script to display the info of a domain and its sub domains
+
+display_info() {
+	local domain="$1"
+	local subdomain="$2"
+
+	dns_info=$(dig +short "$subdomain.$domain")
+
+	record_type=$(echo "$dns_info" | awk 'NR==1{print $1}')
+	destination=$(echo "$dns_info" | awk '{print $1}')
+
+	echo "The subdomain $subdomain is a $record_type record and points to $destination"
+}
+
+if [ $# -eq 2 ]; then
+	domain="$1"
+	subdomain="$2"
+	display_info "$domain" "$subdomain"
+else
+	subdomains=("www" "lb-01" "web-01" "web-02")
+	domain="$1"
+
+	for subdomain in "${subdomains[@]}"; do
+		display_info "$domain" "$subdomain"
+	done
+fi
