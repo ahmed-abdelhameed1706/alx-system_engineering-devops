@@ -5,10 +5,10 @@ display_info() {
 	local domain="$1"
 	local subdomain="$2"
 
-	dns_info=$(dig +short "$subdomain.$domain")
+	dns_info=$(dig "$subdomain.$domain")
 
-	record_type=$(echo "$dns_info" | awk 'NR==1{print $1}')
-	destination=$(echo "$dns_info" | awk '{print $1}')
+	record_type=$(echo "$dns_info" | awk '/^'"$subdomain"'/{print $4}')
+	destination=$(echo "$dns_info" | awk '/^'"$subdomain"'/{print $5}')
 
 	echo "The subdomain $subdomain is a $record_type record and points to $destination"
 }
