@@ -26,8 +26,16 @@ defaults
     timeout check 10s
 
 frontend http
+    bind *:80
+    mode http
+    option forwardfor
+    http-request add-header X-Forwarded-Proto http if !{ ssl_fc }
+
+    acl is_ssl hdr(Host) -i www.ahmed-abdelhameed.tech
+    redirect scheme https code 301 if !is_ssl
+
+frontend https
         bind *:443 ssl crt /etc/letsencrypt/live/www.ahmed-abdelhameed.tech/www.ahmed-abdelhameed.tech.pem
-        bind *:80
         mode http
         default_backend my_backend
 
