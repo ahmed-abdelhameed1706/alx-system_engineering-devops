@@ -4,6 +4,7 @@ function to recursively fetch data
 """
 import requests
 
+
 def recurse(subreddit, hot_list=[], after=None):
     """
     function to recursivley fetch data
@@ -15,7 +16,8 @@ def recurse(subreddit, hot_list=[], after=None):
     if after:
         params['after'] = after
 
-    res = requests.get(url, headers=headers, params=params, allow_redirects=False)
+    res = requests.get(url, headers=headers, params=params,
+                       allow_redirects=False)
 
     if res.status_code == 200:
 
