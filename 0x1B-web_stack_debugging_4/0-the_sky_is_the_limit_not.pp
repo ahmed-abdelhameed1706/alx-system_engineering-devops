@@ -1,3 +1,5 @@
+# fix default nginx file
+
 file { '/etc/default/nginx':
   ensure  => file,
   owner   => 'root',
