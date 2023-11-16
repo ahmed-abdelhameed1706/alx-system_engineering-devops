@@ -1,4 +1,4 @@
-i# fix default nginx file
+# fix default nginx file
 
 file { '/etc/default/nginx':
   ensure  => file,
